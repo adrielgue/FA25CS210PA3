@@ -132,7 +132,7 @@ void printPath(pair<int,int> exitcell,
         //cout << "wall";
         return false;
     }
-    if (visited[r][c]) {
+    if (!visited[r][c]) {
         visited[r][c] = true;
     } else {
         return false;
@@ -215,7 +215,7 @@ int main() {
     // If found, print the path
     // ------------------------------------------------------
        if (found) {
-    //     printPath(exitcell, parent_r, parent_c, ent_r, ent_c);
+           printPath(exitcell, parent_r, parent_c, ent_r, ent_c);
        } else {
            cout << "\nNo path exists.\n";
        }
