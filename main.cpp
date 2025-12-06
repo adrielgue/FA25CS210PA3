@@ -124,23 +124,45 @@ void printPath(pair<int,int> exitcell,
     int mazeRows = maze.size();
     int mazeCols = maze[0].size();
     //  cout << "testing " << r << ", " << c <<"\n";
-    if (r<0 || c<0 || r>=mazeRows || c>=mazeCols) {//out of bounds check
+    if (r<0 || c<0 || r>=mazeRows || c>=mazeCols) {//out of bounds check for r,c
         cout << " out of bound";
         return false;
     }
     if (maze[r][c] == 1) {//wall check
-        cout << "wall";
+        //cout << "wall";
         return false;
     }
+    if (visited[r][c]) {
+        visited[r][c] = true;
+    } else {
+        return false;
+    }
+
     if (exit_r == r && exit_c == c) {
-        cout <<"exit";
+       //cout <<"exit";
         return true;
     }
-    for(int i =0; i < 4; i++) {//neighbor exploration
+    for(int i =0; i < 4; i++) {
+        //neighbor exploration
         int nextRow = r + dr[i];
         int nextCol = c + dc[i];
-        cout << nextRow << ", " << nextCol << "\n";
+        // cout << nextRow << ", " << nextCol << "\n";
+
+        if (nextRow < 0 || nextRow >=mazeRows || nextCol >= mazeCols || nextCol < 0) {
+        } else {
+            if (maze[nextRow][nextCol] == 1 || visited[nextRow][nextCol]) {
+
+            } else {
+                parent_r[nextRow][nextCol] = r;
+                parent_c[nextRow][nextCol] = c;
+
+                if (dfs(nextRow, nextCol, maze, visited, parent_r, parent_c, exit_r, exit_c)) {
+                    return true;
+                }
+            }
+        }
     }
+    return false;
 
    }
 // ----------------------------------------------------------
