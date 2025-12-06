@@ -123,8 +123,7 @@ void printPath(pair<int,int> exitcell,
        // Your code here
     int mazeRows = maze.size();
     int mazeCols = maze[0].size();
-
-    cout << "testing " << r << ", " << c <<"\n";
+    //  cout << "testing " << r << ", " << c <<"\n";
     if (r<0 || c<0 || r>=mazeRows || c>=mazeCols) {//out of bounds check
         cout << " out of bound";
         return false;
@@ -133,6 +132,16 @@ void printPath(pair<int,int> exitcell,
         cout << "wall";
         return false;
     }
+    if (exit_r == r && exit_c == c) {
+        cout <<"exit";
+        return true;
+    }
+    for(int i =0; i < 4; i++) {//neighbor exploration
+        int nextRow = r + dr[i];
+        int nextCol = c + dc[i];
+        cout << nextRow << ", " << nextCol << "\n";
+    }
+
    }
 // ----------------------------------------------------------
 // MAIN PROGRAM (students add DFS calls and logic)
@@ -163,16 +172,21 @@ int main() {
     printMaze(maze, ent_r, ent_c, exit_r, exit_c);
 
     // Students must use these
+
     vector<vector<bool>> visited(N, vector<bool>(M, false));
     vector<vector<int>> parent_r(N, vector<int>(M, -1));
     vector<vector<int>> parent_c(N, vector<int>(M, -1));
 
     // ------------------------------------------------------
     // STUDENT WORK:
+
+
+
     // Call your DFS, track visited, and fill parent_r and parent_c
     // ------------------------------------------------------
-    // bool found = dfs(-1, 0, maze, visited, parent_r, parent_c, exit_r, exit_c);
-       bool found = dfs(0, 0, maze, visited, parent_r, parent_c, exit_r, exit_c);
+    // bool found = dfs(1, 1, maze, visited, parent_r, parent_c, exit_r, exit_c);
+    // bool found = dfs(exit_r, exit_c, maze, visited, parent_r, parent_c, exit_r, exit_c);
+       bool found = dfs(ent_r, ent_c, maze, visited, parent_r, parent_c, exit_r, exit_c);
 
     // ------------------------------------------------------
     // STUDENT WORK:
